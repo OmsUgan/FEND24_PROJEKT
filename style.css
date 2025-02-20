@@ -1,0 +1,120 @@
+body {
+    background-color: #e7f1fd;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 20px;
+    padding: 0;
+}
+.todo-container{
+    background-color: white;
+    height: 100vh;
+}
+
+.todo-welcome-message {
+    background-color: white;
+    border-bottom: 1px solid rgb(190, 190, 190);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    width: 100%;
+}
+
+h3{
+    font-size: 24px;
+    color:   #1a2d42;
+    text-align: start;
+ 
+}
+.box{
+        margin: 20px;
+        background-color:  #e2f2fd;
+        padding: 15px;
+        height: auto;
+        border-radius: 5px;
+
+
+}
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: auto;
+    gap: 5px;
+    cursor: pointer;
+}
+#todo-btn{
+    font-size: 20px;
+    color: #1a2d42;
+    width: 100px;
+    border-radius: 5px;
+    padding: 5px;
+    background-color:transparent;
+    cursor: pointer;
+    border: none ;
+    transition: all 0.3s ease;
+    margin: 15px;
+  }
+  #todo-btn:hover {
+    background-color: #1a2d42; 
+    color: white; 
+    border-color: #fff; 
+  }
+.todo-filter{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: auto;
+        gap: 5px;
+    }
+      
+  .dropdown {
+    display: flex;
+    justify-content: end;
+    padding: 3px;
+    border-radius: 4px;
+    border: 1px solid #1a2d42;
+    color: #1a2d42;
+    background-color: rgba(255, 255, 255, 0.795);
+    cursor: pointer;
+  }
+
+  .todo-start{
+        margin-top: 20px; 
+    }
+    
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+th {
+    color:#1a2d42;
+    background-color: #ffffff;
+}
+
+table tbody tr {
+    background-color: white; 
+  }
+  
+
+  .todo-btn-custom{
+    font-size: 20px;
+    width: 100px;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border: none ;
+    transition: all 0.3s ease;
+    margin: 15px;
+    background-color: #1a2d42;
+  color: white;
+  }
+
+  .todo-btn-custom:hover{
+    background-color: #1a2d42;
+  color: white;
+  }
