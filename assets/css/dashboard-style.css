@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* -------------------------------- */
+body {
+    display: flex;
+    height: 100vh;
+}
+/* -------------------------------- */
+.sidenav {
+    width: 200px;
+    height: 100vh;
+    background-color: #232735;
+    display: flex;
+    flex-direction: column;
+}
+.side-logo {
+    padding: 10px;
+    font-size: 50px;
+    color: white;
+}
+.sidenav-links {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    font-size: 20px;
+    padding: 10px;
+}
+.sidenav-links a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.sidenav-links a.active {
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 5px;
+}
+.sidenav-links a:hover {
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 5px;
+}
+.sidenav-settings {
+    padding: 10px;
+    margin-top: auto;
+}
+.sidenav-settings button {
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    padding: 10px;
+    cursor: pointer;
+}
+.sidenav-settings button:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+.sidenav-settings button img {
+    position: relative;
+    top: 3px;
+}
+/* -------------------------------- */
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 30px;
+    background-color: #dfe2e7;
+}
+/* -------------------------------- */
+.welcome-message {
+    width: 90%;
+    padding: 20px;
+    background-color: white;
+    border: solid 1px #747778;
+    border-radius: 10px;
+    text-align: left;
+}
+/* -------------------------------- */
+.start {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 30px auto;
+    gap: 30px;
+}
+/* -------------------------------- */
+.start div {
+    flex: 1;
+    max-width: calc((100% - 60px) / 3);
+    background-color: white;
+    border: solid 1px #747778;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px; 
+}
