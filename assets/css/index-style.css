@@ -2,7 +2,7 @@
     margin: 0px;
 }
 body {
-    background-color: #e3eed4;
+    background-color: #dfe2e7;
 }
 header {
     display: flex;
@@ -10,7 +10,7 @@ header {
     align-items: center;
     padding: 10px 20px;
     height: 80px;
-    background-color: #aec3b0;
+    background-color: #232735;
     font-size: 50px;
 }
 /* -------------------------------- */
@@ -20,7 +20,7 @@ header {
     margin: 15px;
     gap: 10px;
     font-size: 50px;
-    color: #375534;   
+    color: white;   
     display: flex;
     align-items: center;
 }
@@ -30,8 +30,8 @@ header {
     gap: 20px;
 }
 .signInBtn {
-    background-color: #375534;
-    border: 2px solid white;
+    background-color: #0d6efd;
+    border: 2px solid #0d6efd;
     border-radius: 10px;
     color: white;
     padding:  16px 32px;
@@ -39,9 +39,9 @@ header {
 }
 .signUpBtn {
     background-color: white;
-    border: 2px solid #375534;
+    border: 2px solid white;
     border-radius: 10px;
-    color: #375534;
+    color: black;
     padding:  16px 32px;
     cursor: pointer;
 }
@@ -57,19 +57,19 @@ header {
 .welcome-message h1 {
     margin-bottom: 20px;
     font-size: 45px;
-    color: #375534;
+    color: #232735;
 }
 .welcome-message p {
     margin-bottom: 20px;
     font-size: 30px;
-    color: #375534;
+    color: #232735;
 }
 .welcome-message img {
     border-radius: 15px;
     max-height: 400px;
 }
 spam {
-    color: #0f2a1d;
+    color: black;
     font-size: 60px;
 }
 /* -------------------------------- */
@@ -88,17 +88,14 @@ spam {
     text-align: center;
     color: #000;
 }
-  
 .input-container {
     position: relative;
 }
-  
 .input-container input, .form button {
     outline: none;
     border: 1px solid #e5e7eb;
     margin: 8px 0;
 }
-  
 .input-container input {
     background-color: #fff;
     padding: 1rem;
@@ -115,7 +112,7 @@ spam {
     padding-bottom: 0.75rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-    background-color: #375534;
+    background-color: #0d6efd;
     color: #ffffff;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -123,6 +120,7 @@ spam {
     width: 100%;
     border-radius: 0.5rem;
     text-transform: uppercase;
+    cursor: pointer;
 }
 .cancel {
     display: block;
@@ -138,6 +136,7 @@ spam {
     width: 100%;
     border-radius: 0.5rem;
     text-transform: uppercase;
+    cursor: pointer;
 }
 .signup-link {
     color: #6B7280;
@@ -154,6 +153,8 @@ dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    border: transparent;
 }
 dialog::backdrop {
     background: rgba(0, 0, 0, 0.5);
