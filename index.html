@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="PÖS. Application created by Pegah, Ömer and Sebastian.">
+    <meta name="description" content="The function of this application is to help you organize and prioritize your tasks.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/index-style.css">
+    <script src="assets/js/signUp-In.js" defer></script>
+    <title>Welcome</title>
+</head>
+<body>
+    <header>
+        <div class="side-logo"><img src="/assets/img/logo.png" alt="logo"> PÖS
+        </div>
+        <div id="signIn-signUp">
+            <button class="signInBtn" onclick="dialogOpen('signIn')">Sign In</button>
+            <button class="signUpBtn" onclick="dialogOpen('signUp')">Sign Up</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="welcome-message">
+            <h1>Organize your life in <spam> one place.</spam></h1>
+            <p> Create habits, plan events, and reach your goals with our assistant.</p>
+            <img src="https://i.pinimg.com/736x/26/0f/4a/260f4a84f7e64c0720d07b53e5423813.jpg" alt="dashboard screenshot">
+        </div>
+    </main>
+
+    <dialog id="signIn" onclick="dialogClose('signIn', event)">
+        <form class="form">
+            <p class="form-title">Sign in to your account</p>
+            <div class="input-container">
+                <input type="email" placeholder="Enter email">
+            </div>
+            <div class="input-container">
+                <input type="password" placeholder="Enter password">
+            </div>
+            <button type="submit" class="submit">Sign in</button>
+            <button type="button" class="cancel" onclick="dialogClose('signIn')">Cancel</button>
+        </form>
+    </dialog>
+
+    <dialog id="signUp" onclick="dialogClose('signUp', event)">
+        <form class="form">
+            <p class="form-title">Register an Account</p>
+            <div class="input-container">
+                <input type="text" placeholder="Enter your name">
+            </div>
+            <div class="input-container">
+                <input type="email" placeholder="Enter email">
+            </div>
+            <button type="submit" class="submit">Register</button>
+            <button type="button" class="cancel" onclick="dialogClose('signUp')">Cancel</button>
+        </form>
+    </dialog>
+
+</html>
