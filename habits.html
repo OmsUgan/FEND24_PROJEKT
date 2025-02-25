@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="PÖS. Application created by Pegah, Ömer and Sebastian.">
+    <meta name="description" content="The function of this application is to help you organize and prioritize your tasks.">
+    <meta name="viewport"  content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/habits-style.css">
+    <script src="assets/js/habits.js" defer></script>
+    <title>Habits</title>
+</head>
+<body>
+    <!-- <header>
+        <div id="datum"></div>
+    </header> -->
+
+    <aside class="sidenav">
+        <div class="side-logo"><img src="/assets/img/logo.svg" alt="logo"> PÖS
+        </div>
+        <div class="sidenav-links">
+            <a href="dashboard.html"><img src="/assets/img/smart-home.svg" alt="Home img"> Hem</a>
+            <a href="todo.html"><img src="/assets/img/file-text.svg" alt="Todo img"> Todo</a>
+            <a href="habits.html" class="active"><img src="/assets/img/file-text.svg" alt="Habits img"> Habits</a>
+            <a href="event.html"><img src="/assets/img/file-text.svg" alt="Event planner img"> Event planner</a>
+        </div>
+        <div class="sidenav-settings">
+            <button><img src="/assets/img/user-circle.svg" alt="Settings img"> Username</button>
+        </div>
+    </aside>
+
+    <main class="container">
+        <div class="welcome-message">
+            <h1>Mina habits</h1>
+            <button class="add-habit">Add new task</button> 
+        </div>
+        <dialog id="habit-dialog">
+            <h2>New task</h2>
+            <label for="habit-title">Title:</label>
+            <input type="text" id="habit-title">
+            <label for="habit-priority">Priority:</label>
+            <select id="habit-priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+            <button id="save-habit">Save</button>
+            <button id="close-dialog">Close</button>
+        </dialog>
+
+        <div class="habits-box">
+            <div class="habit-list" id="habit-list"></div>
+        </div>
+    </main>
+
+</html>
