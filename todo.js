@@ -25,7 +25,20 @@ try {
     console.error("Fel vid parsing av todos:", e);
     todoJsonList = [];
 }
-
+//funktion för dynamiska knappar
+function setButtonMode(mode) {
+    if (mode === 0) {
+        dynamicBtn.dataset.mode = "create";
+        dynamicBtn.innerText = "Skapa";
+        // hitta alla inputfält och töm dem
+        document.querySelectorAll("#taskModal input, #taskModal textarea").forEach(input => {
+            input.value = "";
+        });
+    } else if (mode === 1) {
+        dynamicBtn.dataset.mode = "update";
+        dynamicBtn.innerText = "Uppdatera";
+    }
+}
 // byta dynamiska Button till create mode
 createMode.addEventListener("click", function(){
     setButtonMode(0);
@@ -79,25 +92,12 @@ dynamicBtn.addEventListener("click", function() {
 
 displayTodos();
 
-//funktioner
-function setButtonMode(mode) {
-    if (mode === 0) {
-        dynamicBtn.dataset.mode = "create";
-        dynamicBtn.innerText = "Skapa";
-        // hitta alla inputfält och töm dem
-        document.querySelectorAll("#taskModal input, #taskModal textarea").forEach(input => {
-            input.value = "";
-        });
-    } else if (mode === 1) {
-        dynamicBtn.dataset.mode = "update";
-        dynamicBtn.innerText = "Uppdatera";
-    }
-}
+
 
 // hämta todos
-function displayTodos() {
+function displayTodos(todos = todoJsonList) {
     todoList.innerHTML = ""; 
-    todoJsonList.forEach(todo => {
+    todos.forEach(todo => {
         const tr = document.createElement('tr');
         tr.id = todo.id;
 
@@ -182,3 +182,16 @@ function openTaskModal(todo) {
     document.getElementById("taskDeadline").value = todo.deadline || '';
     modalInstance.show(); 
 }
+
+// filtrera kategori
+document.getElementById("filterCategory").addEventListener("change", (event) => {
+    const valdKategori = event.target.value; // Hämta vald kategori
+    console.log(valdKategori);
+
+    let filteredTodos = valdKategori === "all"
+    ? todoJsonList
+    : todoJsonList.filter(todo => todo.category.toLowerCase() === valdKategori.toLowerCase());
+
+    console.log(filteredTodos);
+    displayTodos(filteredTodos); // Skicka vald kategori till displayTodos
+ });
