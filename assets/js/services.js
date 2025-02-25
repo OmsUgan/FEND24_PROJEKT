@@ -8,3 +8,15 @@ export const getFromStorage = (keyName) => {
 }
 
 export const saveToStorage = (keyName, data) => localStorage.setItem(keyName, JSON.stringify(data));
+
+export const generateRandomUUID = () => crypto.randomUUID();
+
+export const swedishDateTimeFormat = (datetime) => {
+    return new Intl.DateTimeFormat('sv-SE', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: '2-digit', 
+        minute: '2-digit'
+    }).format(datetime);
+}
