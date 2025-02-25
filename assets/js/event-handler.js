@@ -61,3 +61,54 @@ const renderEventListPage = (eventData) => {
     eventListDiv.append(eventUl);
 }
 renderEventListPage(eventListFromStorage);
+
+//Spara event
+const createEvent = () => {
+    let eventTitle = document.getElementById("title").value;
+    let eventStartDateTime = new Date(document.getElementById("start").value);
+    let eventEndDateTime = new Date(document.getElementById("end").value);
+
+    const currentDateTime = new Date();
+    eventStartDateTime.setSeconds(0, 0);
+    currentDateTime.setSeconds(0, 0);
+
+    // Lägg till en mikroskopisk tolerans om jämförelsen ändå misslyckas
+    const tolerance = 1; // tolerans i millisekunder
+
+    if (!eventTitle || !eventStartDateTime || !eventEndDateTime) {
+        alert("Alla fält måste fyllas i!");
+        return;
+    }
+
+    if (eventStartDateTime.getTime() + tolerance <= currentDateTime.getTime()) {
+        alert("Startdatum och tid för evenemanget kan inte vara tidigare än nuvarande tid!");
+        return;
+    }
+
+    if (eventEndDateTime.getTime() + tolerance <= eventStartDateTime.getTime()) {
+        alert("Slutdatum och tid måste vara efter startdatum!");
+        return;
+    }
+
+    const newEvent = new ScheduledEvent(generateRandomUUID(), eventTitle, eventStartDateTime.toISOString(), eventEndDateTime.toISOString());
+    eventListFromStorage.push(newEvent);
+    saveToStorage("Event", eventListFromStorage);
+
+    bootstrap.Modal.getInstance(document.getElementById("new-event")).hide();
+    renderEventListPage(eventListFromStorage);
+}
+document.getElementById("save-event").addEventListener("click", createEvent);
+
+// Ta bort event
+document.getElementById("delete-event").addEventListener("click", () => {
+    const id = document.getElementById("id").value;
+    eventListFromStorage = eventListFromStorage.filter(event => event.id !== id);
+    saveToStorage("Event", eventListFromStorage);
+    
+    bootstrap.Modal.getInstance(document.getElementById("deleteModal")).hide();
+    renderEventListPage(eventListFromStorage);
+});
+
+document.getElementById("deleteModal").addEventListener("show.bs.modal", (event) => {
+    document.getElementById("id").value = event.relatedTarget.value;
+});
