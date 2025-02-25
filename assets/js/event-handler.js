@@ -155,3 +155,29 @@ document.getElementById("updateModal").addEventListener("show.bs.modal", (event)
         }
     });  
 });
+
+// Filter
+const filterEvent = (filterType) => {
+    let filteredEvents = [];
+
+    const currentDateTime = new Date();
+    
+    if (filterType === "upcoming") {
+        filteredEvents = eventListFromStorage.filter(event => new Date(event.start) > currentDateTime);
+    } else if (filterType === "past") {
+        filteredEvents = eventListFromStorage.filter(event => new Date(event.end) < currentDateTime);
+    } else if (filterType === "ongoing") {
+        filteredEvents = eventListFromStorage.filter(event => new Date(event.start) <= currentDateTime && new Date(event.end) >= currentDateTime);
+    } else {
+        filteredEvents = eventListFromStorage;
+    }
+    
+    document.getElementById("filter-text").textContent = filterType === "upcoming" ? "Kommande" : filterType === "past" ? "Tidigare" : filterType === "ongoing" ? "Pågående" : "Alla Evenemang";
+
+    renderEventListPage(filteredEvents);
+}
+document.getElementById("standard").addEventListener("click", () => filterEvent('standard'));
+document.getElementById("upcoming").addEventListener("click", () => filterEvent('upcoming'));
+document.getElementById("ongoing").addEventListener("click", () => filterEvent('ongoing'));
+document.getElementById("past").addEventListener("click", () => filterEvent('past'));
+console.log(`Datum & tid just nu: ${new Date().toLocaleString()}`)
