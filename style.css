@@ -118,3 +118,8 @@ table tbody tr {
     background-color: #1a2d42;
   color: white;
   }
+
+  input[type="checkbox"] {
+    transform: scale(1.5); 
+   
+}

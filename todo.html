@@ -38,6 +38,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Avklarad</th>
                         <th><i class="titel"></i> Titel</th>
                         <th><i class="fa-solid fa-file-alt"></i> Beskrivning</th>
                         <th><i class="fa-solid fa-list-check"></i> Status</th>
@@ -81,7 +82,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="taskCategory" class="form-label">Kategori</label>
-                    <input type="text" class="form-control" id="taskCategory" required>
+                    <select class="form-control" id="taskCategory" required>
+                        <option value="">Välj kategori</option>
+                        <option value="hälsa">Hälsa</option>
+                        <option value="hushåll">Hushåll</option>
+                        <option value="jobbrelaterat">Jobbrelaterat</option>
+                        <option value="nöje">Nöje</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="taskDeadline" class="form-label">Deadline</label>

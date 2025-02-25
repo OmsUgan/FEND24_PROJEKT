@@ -54,7 +54,7 @@ dynamicBtn.addEventListener("click", function() {
        
         // hämta todo att uppdatera
         let todoIndex = todoJsonList.findIndex(todo => todo.id === currentTodoId);
-        
+
         if (todoIndex !== -1) {
             // uppdatera todo med nya värden från inputfälten
             todoJsonList[todoIndex].title = document.getElementById('taskTitle').value;
@@ -102,6 +102,7 @@ function displayTodos() {
         tr.id = todo.id;
 
         tr.innerHTML = `
+          <td><input type="checkbox" class="todo-checkbox" data-id="${todo.id}" ${todo.isCompleted ? "checked" : ""}></td>
           <td>${todo.title}</td>
           <td>${todo.description}</td>
           <td>${todo.isCompleted ? "Färdig" : "Ej färdig"}</td>
@@ -116,6 +117,13 @@ function displayTodos() {
 
         todoList.append(tr);
     });
+     //  eventlistener på alla checkboxar
+        document.querySelectorAll(".todo-checkbox").forEach(checkbox => {
+        checkbox.addEventListener("change", function() {
+        const id = this.getAttribute("data-id");
+        toggleTodoCompletion(id, this.checked);
+          });
+             });
 
     // delete eventlistener för att radera en todo
     document.querySelectorAll(".delete-todo").forEach(button => {
@@ -132,6 +140,17 @@ function displayTodos() {
         });
     });
 }
+// Sätt todo som slutförd/ej slutförd
+let toggleTodoCompletion = (todoId) => {
+    let todo = todoJsonList.find(todo => todo.id === todoId);
+    
+    if (todo) {
+        todo.isCompleted = !todo.isCompleted;
+        localStorage.setItem("todos", JSON.stringify(todoJsonList));
+        displayTodos(); 
+    }
+};
+
 // delete function
 function deleteTodo(id){
     todoJsonList = todoJsonList.filter(todo => todo.id !== id);
