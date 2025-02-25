@@ -112,3 +112,46 @@ document.getElementById("delete-event").addEventListener("click", () => {
 document.getElementById("deleteModal").addEventListener("show.bs.modal", (event) => {
     document.getElementById("id").value = event.relatedTarget.value;
 });
+
+//Uppdatera event
+const updateInputs = document.querySelectorAll("#update input");
+document.getElementById("update-event").addEventListener("click", () => {
+    const eventId = document.getElementById("eventId").value;
+    let eventToUpdate = eventListFromStorage.find(event => event.id === eventId);
+
+    updateInputs.forEach(input => {
+        if (input.type === 'datetime-local') {
+            let datetime = new Date(input.value)
+            eventToUpdate[input.name] = datetime.toISOString();
+        } else {
+            eventToUpdate[input.name] = input.value;
+        }
+    });
+
+    const eventIndex = eventListFromStorage.findIndex(event => event.id === eventId);
+    if (eventIndex !== -1) {
+        eventListFromStorage[eventIndex] = eventToUpdate;
+    }
+
+    saveToStorage("Event", eventListFromStorage);
+
+    bootstrap.Modal.getInstance(document.getElementById("updateModal")).hide();
+    renderEventListPage(eventListFromStorage);
+});
+
+
+document.getElementById("updateModal").addEventListener("show.bs.modal", (event) => {
+    const eventId = event.relatedTarget.value;
+    let currentEvent = eventListFromStorage.find(event => event.id === eventId);
+    console.log(currentEvent)
+
+    updateInputs.forEach((input, index) => {
+        if (input.type === 'datetime-local') {
+            let date = new Date(Object.values(currentEvent)[index]);
+            let convertDate = date.toISOString().slice(0, 16);
+            input.value = convertDate;
+        } else {
+            input.value = Object.values(currentEvent)[index];
+        }
+    });  
+});
