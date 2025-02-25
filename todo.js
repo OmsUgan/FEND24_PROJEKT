@@ -186,12 +186,26 @@ function openTaskModal(todo) {
 // filtrera kategori
 document.getElementById("filterCategory").addEventListener("change", (event) => {
     const valdKategori = event.target.value; // Hämta vald kategori
-    console.log(valdKategori);
-
     let filteredTodos = valdKategori === "all"
     ? todoJsonList
     : todoJsonList.filter(todo => todo.category.toLowerCase() === valdKategori.toLowerCase());
 
-    console.log(filteredTodos);
     displayTodos(filteredTodos); // Skicka vald kategori till displayTodos
  });
+
+ // filtrera status
+ document.getElementById("filterStatus").addEventListener("change", (event) => {
+    const valdStatus = event.target.value;
+    let filteredTodos = [];
+
+    if (valdStatus === "all") {
+        filteredTodos = todoJsonList;
+    } else if (valdStatus === "completed") {
+        filteredTodos = todoJsonList.filter(todo => todo.isCompleted); 
+    } else if (valdStatus === "notCompleted") {
+        filteredTodos = todoJsonList.filter(todo => !todo.isCompleted); 
+    }
+
+
+    displayTodos(filteredTodos);
+});
