@@ -101,6 +101,10 @@ function displayTodos() {
         const tr = document.createElement('tr');
         tr.id = todo.id;
 
+        if(todo.isCompleted){
+            tr.classList.add("completed");
+        }
+
         tr.innerHTML = `
           <td><input type="checkbox" class="todo-checkbox" data-id="${todo.id}" ${todo.isCompleted ? "checked" : ""}></td>
           <td>${todo.title}</td>

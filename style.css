@@ -123,3 +123,7 @@ table tbody tr {
     transform: scale(1.5); 
    
 }
+.completed td {
+    text-decoration: line-through;
+    color: gray;
+}
