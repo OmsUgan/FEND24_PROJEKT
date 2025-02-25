@@ -23,13 +23,29 @@
         </div>
         <div class="box">
             <div class="todo-filter">
-            <select id="category" class="dropdown">
-              <option value="all">Välj Kategori</option>
-            </select>
-            <select id="sort" class="dropdown">
-              <option value="ascending">Stigande</option>
-              <option value="descending">Fallande</option>
-            </select>
+                <select id="filterStatus" class="dropdown">
+                    <option value="all">Alla</option>
+                    <option value="completed">Slutförda</option>
+                    <option value="notCompleted">Ej slutförda</option>
+                  </select>
+
+                  <select id="filterCategory" class="dropdown">
+                    <option value="all">Alla kategorier</option>
+                    <option value="hälsa">Hälsa</option>
+                    <option value="hushåll">Hushåll</option>
+                    <option value="jobbrelaterat">Jobbrelaterat</option>
+                    <option value="nöje">Nöje</option>
+                  </select>
+
+                  <select id="sortBy" class="dropdown"> 
+                    <option value="deadlineAsc">Deadline (stigande)</option>
+                    <option value="deadlineDesc">Deadline (fallande)</option>
+                    <option value="timeAsc">Tidsestimat (stigande)</option>
+                    <option value="timeDesc">Tidsestimat (fallande)</option>
+                    <option value="statusAsc">Status (ej slutförda först)</option>
+                    <option value="statusDesc">Status (slutförda först)</option>
+                  </select>
+                  
             <div class="button">
               <button id="todo-btn" data-bs-toggle="modal" data-bs-target= "#taskModal" >+ To-do</button>
         </div>
