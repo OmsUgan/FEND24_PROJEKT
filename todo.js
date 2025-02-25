@@ -209,3 +209,36 @@ document.getElementById("filterCategory").addEventListener("change", (event) => 
 
     displayTodos(filteredTodos);
 });
+
+
+//sortera efter status/deadline/tidsestimat
+document.getElementById("sortBy").addEventListener("change", sortTodos);
+
+function sortTodos() {
+    const sortValue = document.getElementById("sortBy").value;
+    
+    let sortedTodos = [...todoJsonList]; 
+
+    switch (sortValue) {
+        case "deadlineAsc":
+            sortedTodos.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            break;
+        case "deadlineDesc":
+            sortedTodos.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
+            break;
+        case "timeAsc":
+            sortedTodos.sort((a, b) => Number(a.timeEstimate) - Number(b.timeEstimate));
+            break;
+        case "timeDesc":
+            sortedTodos.sort((a, b) => Number(b.timeEstimate) - Number(a.timeEstimate));
+            break;
+        case "statusAsc":
+            sortedTodos.sort((a, b) => a.isCompleted - b.isCompleted); 
+            break;
+        case "statusDesc":
+            sortedTodos.sort((a, b) => b.isCompleted - a.isCompleted); 
+            break;
+    }
+
+    displayTodos(sortedTodos);
+}
