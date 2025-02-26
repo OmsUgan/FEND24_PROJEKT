@@ -1,0 +1,20 @@
+.b-example-vr {
+    height: 100vh;
+}
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #3f4348;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #3f4348;
+}
