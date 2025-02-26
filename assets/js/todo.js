@@ -25,6 +25,7 @@ try {
     console.error("Fel vid parsing av todos:", e);
     todoJsonList = [];
 }
+
 //funktion för dynamiska knappar
 function setButtonMode(mode) {
     if (mode === 0) {
@@ -39,6 +40,7 @@ function setButtonMode(mode) {
         dynamicBtn.innerText = "Uppdatera";
     }
 }
+
 // byta dynamiska Button till create mode
 createMode.addEventListener("click", function(){
     setButtonMode(0);
@@ -89,61 +91,64 @@ dynamicBtn.addEventListener("click", function() {
         }
     }
 });
-
 displayTodos();
-
-
 
 // hämta todos
 function displayTodos(todos = todoJsonList) {
-    todoList.innerHTML = ""; 
-    todos.forEach(todo => {
+    todoList.innerHTML = "";
+    if (todos.length === 0) {
         const tr = document.createElement('tr');
-        tr.id = todo.id;
-
-        if(todo.isCompleted){
-            tr.classList.add("completed");
-        }
-
-        tr.innerHTML = `
-          <td><input type="checkbox" class="todo-checkbox" data-id="${todo.id}" ${todo.isCompleted ? "checked" : ""}></td>
-          <td>${todo.title}</td>
-          <td>${todo.description}</td>
-          <td>${todo.isCompleted ? "Färdig" : "Ej färdig"}</td>
-          <td>${todo.timeEstimate}</td>
-          <td>${todo.category}</td>
-          <td>${todo.deadline}</td>
-          <td>
-             <i class="fas fa-edit text-warning edit-todo" data-id="${todo.id}"></i>
-            <i class="fas fa-trash-alt text-danger delete-todo" data-id="${todo.id}"></i>
-          </td>
-        `;
-
+        tr.innerHTML = "<td colspan='8' class='py-4'>Du har inga todos</td>";
+        tr.classList.add("text-center", "py-2", "fw-bold");
         todoList.append(tr);
-    });
-     //  eventlistener på alla checkboxar
-        document.querySelectorAll(".todo-checkbox").forEach(checkbox => {
-        checkbox.addEventListener("change", function() {
-        const id = this.getAttribute("data-id");
-        toggleTodoCompletion(id, this.checked);
-          });
-             });
-
-    // delete eventlistener för att radera en todo
-    document.querySelectorAll(".delete-todo").forEach(button => {
-        button.addEventListener("click", function() {
-            const id = this.getAttribute("data-id");
-            deleteTodo(id);
+    } else {
+        todos.forEach(todo => {
+            const tr = document.createElement('tr');
+            tr.id = todo.id;
+    
+            tr.innerHTML = `
+                <td> <div class="form-check form-switch form-switch-md"><input class="form-check-input" type="checkbox" role="switch" data-id="${todo.id}" ${todo.isCompleted ? "checked" : ""}></div></td>
+                <td>${todo.title}</td>
+                <td>${todo.description}</td>
+                <td>${todo.isCompleted ? "<span class='text-success fw-bold'>Färdig</span>" : "<span class='text-danger fw-bold'>Ej färdig</span>"}</td>
+                <td>${todo.timeEstimate}</td>
+                <td>${todo.category}</td>
+                <td>${todo.deadline}</td>
+                <td class="text-end">
+                    <i class="fas fa-edit me-2 edit-todo" data-id="${todo.id}"></i>
+                    <i class="fas fa-trash-alt delete-todo" data-id="${todo.id}"></i>
+                </td>
+            `;
+            todoList.append(tr);
         });
-    });
-    // edit eventlistener för att ändra en todo
-    document.querySelectorAll(".edit-todo").forEach(button => {
-        button.addEventListener("click", function() {
-            const id = this.getAttribute("data-id");
-            updateTodo(id);
+    
+        //eventlistener på alla checkboxar
+        document.querySelectorAll(".form-check-input").forEach(checkbox => {
+            checkbox.addEventListener("change", function() {
+                const id = this.getAttribute("data-id");
+                toggleTodoCompletion(id, this.checked);
+            });
         });
-    });
+    
+            // delete eventlistener för att radera en todo
+        document.querySelectorAll(".delete-todo").forEach(button => {
+            button.addEventListener("click", function() {
+                const id = this.getAttribute("data-id");
+                deleteTodo(id);
+            });
+        });
+    
+        // edit eventlistener för att ändra en todo
+        document.querySelectorAll(".edit-todo").forEach(button => {
+            button.addEventListener("click", function() {
+                const id = this.getAttribute("data-id");
+                updateTodo(id);
+            });
+        });
+    }
+        
 }
+
 // Sätt todo som slutförd/ej slutförd
 let toggleTodoCompletion = (todoId) => {
     let todo = todoJsonList.find(todo => todo.id === todoId);
@@ -162,6 +167,7 @@ function deleteTodo(id){
     const row = document.getElementById(id);
     row.remove(); 
 }
+
 // edit function
 function updateTodo(id){
     currentTodoId = id; // id för aktuell todo
@@ -170,6 +176,7 @@ function updateTodo(id){
     setButtonMode(1);
     openTaskModal(todo);
 }
+
 // öppna modal och fyll i todo-data
 function openTaskModal(todo) {
     const modalElement = document.getElementById("taskModal");
@@ -191,10 +198,10 @@ document.getElementById("filterCategory").addEventListener("change", (event) => 
     : todoJsonList.filter(todo => todo.category.toLowerCase() === valdKategori.toLowerCase());
 
     displayTodos(filteredTodos); // Skicka vald kategori till displayTodos
- });
+});
 
- // filtrera status
- document.getElementById("filterStatus").addEventListener("change", (event) => {
+// filtrera status
+document.getElementById("filterStatus").addEventListener("change", (event) => {
     const valdStatus = event.target.value;
     let filteredTodos = [];
 
@@ -206,10 +213,8 @@ document.getElementById("filterCategory").addEventListener("change", (event) => 
         filteredTodos = todoJsonList.filter(todo => !todo.isCompleted); 
     }
 
-
     displayTodos(filteredTodos);
 });
-
 
 //sortera efter status/deadline/tidsestimat
 document.getElementById("sortBy").addEventListener("change", sortTodos);
@@ -237,6 +242,9 @@ function sortTodos() {
             break;
         case "statusDesc":
             sortedTodos.sort((a, b) => b.isCompleted - a.isCompleted); 
+            break;
+        default:
+            displayTodos(sortedTodos);
             break;
     }
 
