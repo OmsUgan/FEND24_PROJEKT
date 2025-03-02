@@ -1,0 +1,9 @@
+.list-group-item {
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    margin-top: 0;
+    border-width: 0 !important;
+  }
