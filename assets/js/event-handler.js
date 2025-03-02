@@ -200,4 +200,60 @@ document.getElementById("standard").addEventListener("click", () => filterEvent(
 document.getElementById("upcoming").addEventListener("click", () => filterEvent('upcoming'));
 document.getElementById("ongoing").addEventListener("click", () => filterEvent('ongoing'));
 document.getElementById("past").addEventListener("click", () => filterEvent('past'));
+
+// Växla vy mellan listan och kalender
+document.getElementById("list-view").addEventListener("click", event => {
+    console.log(event.target.id);
+    
+    const eventFilter = document.getElementById("filter-text");
+    const eventListBtn = document.getElementById("show-event-list");
+    const eventListDiv = document.getElementById("event-list");
+    const eventCalendarDiv = document.getElementById("calendar-card");
+    const eventCalendarBtn = document.getElementById("show-event-calendar");
+    
+    if (event.target.id === "show-event-list") {
+        eventListDiv.style.display = "block";
+        eventCalendarDiv.style.display = "none";
+        eventCalendarBtn.hidden = false;
+        eventListBtn.hidden = true;
+        eventFilter.hidden = false;
+        renderEventListPage(eventListFromStorage);
+    } else if (event.target.id === "show-event-calendar") {
+        eventListDiv.style.display = "none";
+        eventCalendarDiv.style.display = "block";
+        eventListBtn.hidden = false;
+        eventCalendarBtn.hidden = true;
+        eventFilter.hidden = true;
+
+        const calendarEl = document.getElementById('calendar-list');
+        if (!calendarEl.dataset.rendered) {
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                events: eventListFromStorage,
+                initialView: 'dayGridMonth',
+                timeZone: 'local',
+                eventColor: '#212529',
+                locale: 'sv',
+                firstDay: 1,
+                eventTimeFormat: { 
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                },
+                eventDisplay: 'block',
+                progressiveEventRendering: true,
+                displayEventTime: true,
+                displayEventEnd: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                weekNumbers: true,
+            });
+            calendar.setOption('height', 850);
+        }
+        calendar.render();
+        renderEventListPage(eventListFromStorage);
+    }
+});
 console.log(`Datum & tid just nu: ${new Date().toLocaleString()}`)
