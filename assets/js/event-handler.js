@@ -57,7 +57,7 @@ const renderEventListPage = (eventData) => {
             titleCol.append(spanTitle);
 
             const small = document.createElement("small");
-            small.textContent = `${swedishDateTimeFormat(new Date(event.start))} — ${swedishDateTimeFormat(new Date(event.end)).toLocaleString()}`;
+            small.textContent = `${swedishDateTimeFormat(new Date(event.start))} — ${swedishDateTimeFormat(new Date(event.end))}`;
             timeCol.append(small);
 
             const actionDiv = document.createElement("div");
