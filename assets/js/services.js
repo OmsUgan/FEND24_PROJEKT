@@ -22,16 +22,16 @@ export const swedishDateTimeFormat = (datetime) => {
 }
 
 // Event
-export const createButton = (textContent, value, classList, dataToggle = "", dataTarget = "") => {
-    const button = document.createElement("button");
-    button.textContent = textContent;
-    button.value = value;
-    button.classList.add(...classList.split(" "));
+// export const createButton = (textContent, value, classList, dataToggle = "", dataTarget = "") => {
+//     const button = document.createElement("button");
+//     button.textContent = textContent;
+//     button.value = value;
+//     button.classList.add(...classList.split(" "));
 
-    if (dataToggle && dataTarget) {
-        button.setAttribute("data-bs-toggle", dataToggle);
-        button.setAttribute("data-bs-target", dataTarget);
-    }
+//     if (dataToggle && dataTarget) {
+//         button.setAttribute("data-bs-toggle", dataToggle);
+//         button.setAttribute("data-bs-target", dataTarget);
+//     }
 
-    return button;
-}
+//     return button;
+// }

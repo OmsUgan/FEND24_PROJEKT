@@ -1,5 +1,5 @@
 import { ScheduledEvent } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, createButton } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat } from "./services.js";
 
 let eventListFromStorage = getFromStorage("Event");
 
@@ -14,21 +14,31 @@ const renderEventListPage = (eventData) => {
     if (eventData.length === 0) {
         const eventLi = document.createElement("li");
         eventLi.textContent = "Du har inga evenemang sparade!"; 
-        eventLi.classList.add("list-group-item", "text-center");
+        eventLi.classList.add("list-group-item", "d-flex", "justify-content-center", "fw-semibold");
         eventUl.append(eventLi);
     } else {
         eventData.sort((a, b) => new Date(a.start) - new Date(b.end));
         
         eventData.forEach(event => {
+            const currentDateTime = new Date();
+            
             const eventLi = document.createElement("li");
-            eventLi.classList.add("list-group-item", "d-flex", "justify-content-between");
-            eventLi.textContent = event.title;
+            eventLi.classList.add("list-group-item");
+
+            const gridDivContainer = document.createElement("div");
+            gridDivContainer.classList.add("container", "p-2");
+
+            const gridRowDiv = document.createElement("div");
+            gridRowDiv.classList.add("row", "d-flex", "align-items-center")
+            
+            const statusCol = createGridCol("col-md-2");
+            const titleCol = createGridCol("col-md-4");
+            const timeCol = createGridCol("col-md-3");
+            const actionCol = createGridCol("col-md-3");
 
             const span = document.createElement("span");
             span.classList.add("px-2", "py-1", "fw-semibold", "rounded")
-
-            const currentDateTime = new Date();
-
+            
             if (new Date(event.start) > currentDateTime) {
                 span.classList.add("text-success-emphasis", "bg-success-subtle", "border", "border-success-subtle")
                 span.textContent = "Kommande";
@@ -39,27 +49,38 @@ const renderEventListPage = (eventData) => {
                 span.classList.add("text-warning-emphasis", "bg-warning-subtle", "border", "border-warning-subtle")
                 span.textContent = "Pågående";
             }
-            eventLi.prepend(span);
+            statusCol.append(span);
+            
+            const spanTitle = document.createElement("span");
+            spanTitle.classList.add("h6");
+            spanTitle.textContent = event.title;
+            titleCol.append(spanTitle);
 
-            const divButton = document.createElement("div");
-            divButton.classList.add("d-flex", "gap-2");
+            const small = document.createElement("small");
+            small.textContent = `${swedishDateTimeFormat(new Date(event.start))} — ${swedishDateTimeFormat(new Date(event.end)).toLocaleString()}`;
+            timeCol.append(small);
 
-            const divStartEnd = document.createElement("div");
-            const pStartEnd = document.createElement("p");
-            pStartEnd.textContent = `Startar: ${swedishDateTimeFormat(new Date(event.start))} - Slutar: ${swedishDateTimeFormat(new Date(event.end)).toLocaleString()}`
+            const actionDiv = document.createElement("div");
+            actionDiv.classList.add("d-flex", "justify-content-end", "gap-3");
+            actionDiv.innerHTML = `<i class="fa-solid fa-pen fa-sm" style="color: #4a4e54;" data-bs-toggle="modal" data-bs-target="#updateModal" data-event-id="${event.id}"></i><i class="fa-solid fa-trash fa-sm" style="color: #4a4e54;" data-bs-toggle="modal" data-bs-target="#deleteModal" data-event-id="${event.id}"></i>`
+            actionCol.append(actionDiv);
 
-            const btnDelete = createButton("Ta bort", event.id, "btn btn-danger", "modal", "#deleteModal");
-
-            new Date(event.end) >= currentDateTime ? divButton.append(createButton("Uppdatera", event.id, "btn btn-info text-white", "modal", "#updateModal")) : null;
-
-            divStartEnd.append(pStartEnd);
-            divButton.append(btnDelete)
-            eventLi.append(divStartEnd, divButton);
+            gridRowDiv.append(statusCol, titleCol, timeCol, actionCol);
+            gridDivContainer.append(gridRowDiv);
+            eventLi.append(gridDivContainer);
             eventUl.append(eventLi);
         });
     }
     eventListDiv.append(eventUl);
 }
+
+const createGridCol = (classList) => {
+    const div = document.createElement("div");
+    div.classList.add(classList);
+
+    return div;
+}
+
 renderEventListPage(eventListFromStorage);
 
 //Spara event
@@ -110,7 +131,7 @@ document.getElementById("delete-event").addEventListener("click", () => {
 });
 
 document.getElementById("deleteModal").addEventListener("show.bs.modal", (event) => {
-    document.getElementById("id").value = event.relatedTarget.value;
+    document.getElementById("id").value = event.relatedTarget.dataset.eventId;
 });
 
 //Uppdatera event
@@ -139,9 +160,8 @@ document.getElementById("update-event").addEventListener("click", () => {
     renderEventListPage(eventListFromStorage);
 });
 
-
 document.getElementById("updateModal").addEventListener("show.bs.modal", (event) => {
-    const eventId = event.relatedTarget.value;
+    const eventId = event.relatedTarget.dataset.eventId;
     let currentEvent = eventListFromStorage.find(event => event.id === eventId);
     console.log(currentEvent)
 
