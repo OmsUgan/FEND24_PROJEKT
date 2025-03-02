@@ -115,6 +115,10 @@ const createEvent = () => {
     eventListFromStorage.push(newEvent);
     saveToStorage("Event", eventListFromStorage);
 
+    document.getElementById("title").value = "";
+    document.getElementById("start").value = "";
+    document.getElementById("end").value = "";
+
     bootstrap.Modal.getInstance(document.getElementById("new-event")).hide();
     renderEventListPage(eventListFromStorage);
 }
