@@ -128,3 +128,19 @@ function saveHabit() {
 }
 document.getElementById("save-habit").addEventListener("click", saveHabit);
 
+
+//Uppdaterar det som vi har i localstorage
+function updateHabitInLocalStorage(updatedHabit) {
+    // Här letar vi efter en specifik habit genom sin ID
+    let habit = habitsDataList.find(habit => habit.id === updatedHabit.id);
+
+    //Och om vi hittar den, uppdaterar vi deras värden
+    if (habit) {
+ 
+        habit.title = updatedHabit.title;
+        habit.priority = updatedHabit.priority;
+        habit.count = updatedHabit.count;
+        
+        saveToStorage("Habit", habitsDataList)
+    }
+}
