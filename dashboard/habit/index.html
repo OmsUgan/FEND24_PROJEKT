@@ -133,5 +133,24 @@
           </div>
         </div>
     </div>
+
+    <div class="modal fade" id="delete-habit" tabindex="-1" aria-labelledby="deleteHabitLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Ta bort rutin</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <input type="text" name="id" id="id" class="form-control text-secondary" hidden>
+              <p class="fs-6">Är du säker på att du vill ta bort den här rutinen?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Nej</button>
+            <button type="button" class="btn btn-primary" id="confirm-delete-habit">Ja</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

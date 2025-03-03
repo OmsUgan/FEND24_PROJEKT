@@ -54,7 +54,7 @@ function createHabitElement(habit) {
             actionCol.innerHTML = `
             <div class="habit-actions">
                 <button class="reset">Reset</button>
-                <button class="delete">Delete</button>
+                <i class="fa-solid fa-trash fa-sm" style="color: #4a4e54;" data-bs-toggle="modal" data-bs-target="#delete-habit" data-habit-id="${habit.id}"></i>
             </div>
             `
 
@@ -79,13 +79,11 @@ function createHabitElement(habit) {
             const decreaseBtn = counterCol.querySelector('.decrease');
             const increaseBtn = counterCol.querySelector('.increase');
             const resetBtn = actionCol.querySelector('.reset');
-            const deleteBtn = actionCol.querySelector('.delete');
                 
             //Efter att ha hittat de måste vi definiera vad kommer att hända när knapparna trycks ner
             decreaseBtn.addEventListener('click', () => whenPressingTheButton('decrease'));
             increaseBtn.addEventListener('click', () => whenPressingTheButton('increase'));
             resetBtn.addEventListener('click', () => whenPressingTheButton('reset'));
-            deleteBtn.addEventListener('click', () => deleteHabit(habit.id));
 
             gridRowDiv.append(counterCol, titleCol, priorityCol, actionCol);
             gridDivContainer.append(gridRowDiv);
@@ -128,6 +126,19 @@ function saveHabit() {
 }
 document.getElementById("save-habit").addEventListener("click", saveHabit);
 
+//Raderar habit och uppdaterar dokumentet
+document.getElementById("confirm-delete-habit").addEventListener("click", () => {
+    const id = document.getElementById("id").value;
+    habitsDataList = habitsDataList.filter(habit => habit.id !== id);
+    saveToStorage("Habit", habitsDataList);
+    
+    bootstrap.Modal.getInstance(document.getElementById("delete-habit")).hide();
+    createHabitElement(habitsDataList);
+});
+
+document.getElementById("delete-habit").addEventListener("show.bs.modal", (event) => {
+    document.getElementById("id").value = event.relatedTarget.dataset.habitId;
+});
 
 //Uppdaterar det som vi har i localstorage
 function updateHabitInLocalStorage(updatedHabit) {
