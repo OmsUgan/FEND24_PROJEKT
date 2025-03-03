@@ -6,3 +6,12 @@ export class ScheduledEvent {
         this.end = endDate;   
     }
 }
+
+export class Habit {
+    constructor(id, title, priority, count) {
+        this.id = id;
+        this.title = title;
+        this.priority = priority;
+        this.count = count;   
+    }
+}
