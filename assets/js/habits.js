@@ -4,6 +4,7 @@ import { getFromStorage, saveToStorage, generateRandomUUID } from "./services.js
 //Hämtas habits från localstorage
 let habitsDataList = getFromStorage("Habit");
 
+//Renderar habit i en lista
 function createHabitElement(habit) {
     const habitListDiv = document.getElementById("habit-list");
 
@@ -40,7 +41,7 @@ function createHabitElement(habit) {
             titleCol.append(spanTitle);
             
             const spanPriority = document.createElement("span");
-            spanPriority.textContent = habit.priority;
+            spanPriority.textContent = habit.priority === "low" ? "Låg" : habit.priority === "medium" ? "Medel" : habit.priority === "high" ? "Hög" : null;
             priorityCol.append(spanPriority);
 
             counterCol.innerHTML = `
@@ -103,3 +104,27 @@ const createGridCol = (classList) => {
 }
 
 createHabitElement(habitsDataList);
+
+//Här skapar vi en ny habit där vi sparar rubriken, prioriteringen och vi ger den en unik ID
+function saveHabit() {
+    const title = document.getElementById("title").value;
+    const priority = document.getElementById("habit-priority").value;
+    
+    if (!title || priority === "") {
+        alert("Titel måste fyllas i!");
+        return;
+    }
+
+    const newHabit = new Habit(generateRandomUUID(), title, priority, 0)
+    
+    //Här pushar vi den nya habit till våran array och vi sparar den
+    habitsDataList.push(newHabit);
+    saveToStorage("Habit", habitsDataList);
+
+    bootstrap.Modal.getInstance(document.getElementById("new-habit")).hide();
+
+    //Vi kallar funktionen som visar habit i dokumentet
+    createHabitElement(habitsDataList);
+}
+document.getElementById("save-habit").addEventListener("click", saveHabit);
+
