@@ -30,10 +30,10 @@ function createHabitElement(habit) {
             const gridRowDiv = document.createElement("div");
             gridRowDiv.classList.add("row", "d-flex", "align-items-center")
 
+            const priorityCol = createGridCol("col-md-1");
+            const titleCol = createGridCol("col-md-7");
             const counterCol = createGridCol("col-md-2");
-            const titleCol = createGridCol("col-md-4");
-            const priorityCol = createGridCol("col-md-3");
-            const actionCol = createGridCol("col-md-3");
+            const actionCol = createGridCol("col-md-2");
 
             const spanTitle = document.createElement("span");
             spanTitle.classList.add("h6");
@@ -41,20 +41,35 @@ function createHabitElement(habit) {
             titleCol.append(spanTitle);
             
             const spanPriority = document.createElement("span");
-            spanPriority.textContent = habit.priority === "low" ? "Låg" : habit.priority === "medium" ? "Medel" : habit.priority === "high" ? "Hög" : null;
+            spanPriority.classList.add("px-2", "py-1", "fw-semibold", "rounded");
+
+            if (habit.priority === "low") {
+                spanPriority.classList.add("text-success-emphasis", "bg-success-subtle", "border", "border-success-subtle")
+                spanPriority.textContent = "Låg";
+            } else if (habit.priority === "medium") {
+                spanPriority.classList.add("text-warning-emphasis", "bg-warning-subtle", "border", "border-warning-subtle")
+                spanPriority.textContent = "Medel";
+            } else {
+                spanPriority.classList.add("text-danger-emphasis", "bg-danger-subtle", "border", "border-danger-subtle")
+                spanPriority.textContent = "Hög";
+            }
+            
             priorityCol.append(spanPriority);
 
             counterCol.innerHTML = `
             <div class="habit-controls">
-                <button class="decrease">-</button>
-                <p class="counter">${habit.count}</p>
-                <button class="increase">+</button>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-dark decrease">-</button>
+                    <button class="btn btn-dark counter" style="--bs-btn-disabled-bg: #212529; --bs-btn-disabled-opacity: 1;" disabled>${habit.count}</button>
+                    <button class="btn btn-dark increase">+</button>
+                </div>
             </div>
             `
+
             actionCol.innerHTML = `
-            <div class="habit-actions">
-                <button class="reset">Reset</button>
-                <i class="fa-solid fa-trash fa-sm" style="color: #4a4e54;" data-bs-toggle="modal" data-bs-target="#delete-habit" data-habit-id="${habit.id}"></i>
+            <div class="habit-actions d-flex justify-content-end gap-3">
+                <i class="fa-solid fa-rotate-right reset" style="color: #4a4e54;"></i>
+                <i class="fa-solid fa-trash" style="color: #4a4e54;" data-bs-toggle="modal" data-bs-target="#delete-habit" data-habit-id="${habit.id}"></i>
             </div>
             `
 
@@ -85,7 +100,7 @@ function createHabitElement(habit) {
             increaseBtn.addEventListener('click', () => whenPressingTheButton('increase'));
             resetBtn.addEventListener('click', () => whenPressingTheButton('reset'));
 
-            gridRowDiv.append(counterCol, titleCol, priorityCol, actionCol);
+            gridRowDiv.append(priorityCol, titleCol, counterCol, actionCol);
             gridDivContainer.append(gridRowDiv);
             habitList.append(gridDivContainer);
             habitUl.append(habitList);
