@@ -59,9 +59,9 @@ function createHabitElement(habit) {
             counterCol.innerHTML = `
             <div class="habit-controls">
                 <div class="btn-group" role="group">
-                    <button class="btn btn-dark decrease">-</button>
+                    <button class="btn btn-dark decrease fw-bold">-</button>
                     <button class="btn btn-dark counter" style="--bs-btn-disabled-bg: #212529; --bs-btn-disabled-opacity: 1;" disabled>${habit.count}</button>
-                    <button class="btn btn-dark increase">+</button>
+                    <button class="btn btn-dark increase fw-bold">+</button>
                 </div>
             </div>
             `
@@ -170,3 +170,45 @@ function updateHabitInLocalStorage(updatedHabit) {
         saveToStorage("Habit", habitsDataList)
     }
 }
+
+//Filter habits
+function filterHabits() {
+    const selectedPriority = document.getElementById('filter-priority').value;
+    let filteredHabit = []
+    
+    filteredHabit = habitsDataList.filter(habit => selectedPriority === 'all' || habit.priority === selectedPriority);
+    createHabitElement(filteredHabit)
+}
+document.getElementById('filter-priority').addEventListener('change', filterHabits);
+
+//Sortera habits
+
+// Sortera habits
+function sortHabits() {
+    const sortOption = document.getElementById('sort-options').value;
+    const priorityMap = { "low": 1, "medium": 2, "high": 3 };
+    
+    switch (sortOption) {
+        case 'priority-asc':
+            habitsDataList.sort((a, b) => priorityMap[a.priority] - priorityMap[b.priority]);
+            break;
+        case 'priority-desc':
+            habitsDataList.sort((a, b) => priorityMap[b.priority] - priorityMap[a.priority]);
+            break;
+        case 'count-asc':
+            habitsDataList.sort((a, b) => a.count - b.count);
+            break;
+        case 'count-desc':
+            habitsDataList.sort((a, b) => b.count - a.count);
+            break;
+        case 'name-asc':
+            habitsDataList.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        case 'name-desc':
+            habitsDataList.sort((a, b) => b.title.localeCompare(a.title));
+            break;
+    }
+    createHabitElement(habitsDataList);
+}
+
+document.getElementById('sort-options').addEventListener('change', sortHabits);
