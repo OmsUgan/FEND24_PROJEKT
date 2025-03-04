@@ -115,8 +115,8 @@ function displayTodos(todos = todoJsonList) {
                 <td>${todo.category}</td>
                 <td>${todo.deadline}</td>
                 <td class="text-end">
-                    <i class="fas fa-edit me-2 edit-todo" data-id="${todo.id}"></i>
-                    <i class="fas fa-trash-alt delete-todo" data-id="${todo.id}"></i>
+                    <i class="fa-solid fa-pen me-2 edit-todo" style="color: #4a4e54;" data-id="${todo.id}"></i>
+                    <i class="fa-solid fa-trash delete-todo" style="color: #4a4e54;" data-id="${todo.id}"></i>
                 </td>
             `;
             todoList.append(tr);
