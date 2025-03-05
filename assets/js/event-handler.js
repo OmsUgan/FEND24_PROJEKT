@@ -1,5 +1,9 @@
 import { ScheduledEvent } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, ifNotAuthenticated, loggedUserName, logOutUser } from "./services.js";
+
+ifNotAuthenticated();
+loggedUserName();
+document.getElementById("logout").addEventListener("click", logOutUser);
 
 let eventListFromStorage = getFromStorage("Event");
 

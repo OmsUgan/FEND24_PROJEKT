@@ -21,6 +21,46 @@ export const swedishDateTimeFormat = (datetime) => {
     }).format(datetime);
 }
 
+
+// Hash password logga in/registrering
+export const hashPassword = async (password) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    return hashArray.map(byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+// Kontroll om användaren är autentiserad, om inte skicka till login sidan
+export const isAuthenticated = () => {
+    return sessionStorage.getItem("loggedUser") !== null;
+}
+
+export const ifNotAuthenticated = () => {
+    if (!isAuthenticated()) {
+        window.location.href = "/auth/login.html";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+// Hämta användaren från sessionStorage
+export const getLoggedUserFromStorage = () => {
+    const user = sessionStorage.getItem("loggedUser");
+    return user ? JSON.parse(user) : null;
+};
+
+export const loggedUserName = () => {
+    return document.getElementById("logged-user-name").textContent = `${getLoggedUserFromStorage().firstName} ${getLoggedUserFromStorage().lastName}`
+}
+
+export const logOutUser = () => {
+    sessionStorage.clear();
+    return window.location.href = "/auth/login.html";
+}
+
 // Event
 // export const createButton = (textContent, value, classList, dataToggle = "", dataTarget = "") => {
 //     const button = document.createElement("button");
