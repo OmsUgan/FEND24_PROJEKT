@@ -1,14 +1,13 @@
-import { getFromStorage, hashPassword } from "../js/services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, hashPassword } from "../js/services.js";
 import { User } from "../js/classes.js"
 
 const usersList = getFromStorage("Users");
-console.log(usersList);
+const error = document.getElementById("error");
 
 // Login
 const login = async () => {
     const email = document.getElementById("email").value
     const password = document.getElementById("password").value
-    const error = document.getElementById("error");
 
     if (!email || !password) {
         error.textContent = "Fyll i både e-postadress och lösenord.";
@@ -29,59 +28,83 @@ const login = async () => {
     }
 }
 
-document.getElementById("btn-login").addEventListener("click", login);
+const loginButton = document.getElementById("btn-login");
+if (loginButton) {
+    loginButton.addEventListener("click", login);
+}
 
 //Register
-function togglePassword(inputId, iconId) {
-    const passwordInput = document.getElementById(inputId);
-    const icon = document.getElementById(iconId);
+document.querySelectorAll(".PasswordToggler").forEach((toggler) => {
+    toggler.addEventListener("click", (event) => {
+        event.preventDefault();
+            
+        const passwordField = document.getElementById(toggler.dataset.target);
+        const showIcon = toggler.querySelector(".Show");
+        const hideIcon = toggler.querySelector(".Hide");
 
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        icon.classList.remove("bi-eye-slash");
-        icon.classList.add("bi-eye");
-    } else {
-        passwordInput.type = "password";
-        icon.classList.remove("bi-eye");
-        icon.classList.add("bi-eye-slash");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            hideIcon.style.display = "block";
+            showIcon.style.display = "none";
+        } else {
+            passwordField.type = "password";
+            hideIcon.style.display = "none";
+            showIcon.style.display = "block";
+        }
+    });
+});
+
+const register = async () => {
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        error.textContent = "Alla fält måste fyllas i!";
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        error.textContent = "E-postadressen är ogiltig!";
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        error.textContent = "Bekräftelselösenordet stämmer inte överens med lösenordet!";
+        return;
+    }
+
+    if (password.length < 5 || confirmPassword.length < 5) {
+        error.textContent = "Lösenordet måste vara minst 5 tecken!";
+        return;
+    }
+
+    if (usersList.some(user => user.email === email)) {
+        error.textContent = "Denna e-postadress är redan registrerad. Välj en annan!";
+        return;
+    }
+
+    const hashedPassword = await hashPassword(password);
+    const newUser = new User(generateRandomUUID(), firstName, lastName, email, hashedPassword);
+
+    if (newUser) {
+        usersList.push(newUser);
+        saveToStorage("Users", usersList)
+        sessionStorage.setItem("loggedUser", JSON.stringify(new User(newUser.id, newUser.firstName, newUser.lastName, newUser.email)));
+
+        error.textContent = "";
+        window.location.href = "/dashboard/index.html";
     }
 }
 
-let users = JSON.parse(localStorage.getItem("users")) || [];
+const isValidEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email)
+}
 
-document.getElementById("registerForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    let firstName = document.getElementById("firstName").value.trim();
-    let lastName = document.getElementById("lastName").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let password = document.getElementById("password").value.trim();
-    let confirmPassword = document.getElementById("confirmPassword").value.trim();
-
-    if (users.some(user => user.email === email)) {
-        errorMessage.textContent = "E-postadressen finns redan! Välj en annan.";
-        return;
-    }
-        // Kontrollera om lösenorden matchar
-        if (password !== confirmPassword) {
-            errorMessage.textContent = "Lösenord stämmer inte överens! Försök igen.";
-            return;
-        }
-    
-    let userId = crypto.randomUUID();
-
-    let newUser = { id: userId, firstName, lastName, email, password };
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-    document.getElementById("registerForm").reset();
-    errorMessage.textContent = "Användaren har registrerats";
-     errorMessage.classList.remove("text-danger");
-     errorMessage.classList.add("text-success");
- 
-     // Återställer textfärgen efter 2 sekunder
-     setTimeout(() => {
-         errorMessage.textContent = "";
-         errorMessage.classList.remove("text-success");
-         errorMessage.classList.add("text-danger");
-     }, 3000);
- });
+const registerButton = document.getElementById("btn-register");
+if (registerButton) {
+    registerButton.addEventListener("click", register);
+}
