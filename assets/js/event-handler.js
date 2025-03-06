@@ -1,14 +1,16 @@
 import { ScheduledEvent } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, ifNotAuthenticated, loggedUserName, logOutUser } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage, getUserActivities } from "./services.js";
 
 ifNotAuthenticated();
 loggedUserName();
 document.getElementById("logout").addEventListener("click", logOutUser);
 
-let eventListFromStorage = getFromStorage("Event");
+//let eventListFromStorage = getFromStorage("Event");
+let { userEvents: eventListFromStorage } = getUserActivities();
 
 const renderEventListPage = (eventData) => {
     const eventListDiv = document.getElementById("event-list");
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit',  minute: '2-digit' };
 
     const eventUl = document.createElement("ul");
     eventUl.classList.add("list-group");
@@ -61,7 +63,7 @@ const renderEventListPage = (eventData) => {
             titleCol.append(spanTitle);
 
             const small = document.createElement("small");
-            small.textContent = `${swedishDateTimeFormat(new Date(event.start))} — ${swedishDateTimeFormat(new Date(event.end))}`;
+            small.textContent = `${swedishDateTimeFormat(new Date(event.start), options)} — ${swedishDateTimeFormat(new Date(event.end), options)}`;
             timeCol.append(small);
 
             const actionDiv = document.createElement("div");
@@ -115,7 +117,7 @@ const createEvent = () => {
         return;
     }
 
-    const newEvent = new ScheduledEvent(generateRandomUUID(), eventTitle, eventStartDateTime.toISOString(), eventEndDateTime.toISOString());
+    const newEvent = new ScheduledEvent(generateRandomUUID(), eventTitle, eventStartDateTime.toISOString(), eventEndDateTime.toISOString(), getLoggedUserFromStorage().id);
     eventListFromStorage.push(newEvent);
     saveToStorage("Event", eventListFromStorage);
 

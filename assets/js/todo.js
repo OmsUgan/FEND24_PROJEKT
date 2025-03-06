@@ -1,30 +1,18 @@
-class Todo {
-    constructor(id, title, description, timeEstimate, category, deadline, isCompleted) {
-        this.id = id;
-        this.title = title;
-        this.description = description;  
-        this.timeEstimate = timeEstimate;  
-        this.category = category;  
-        this.deadline = deadline; 
-        this.isCompleted = isCompleted;     
-    }
-}
+import { Todo } from "./classes.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage, getUserActivities } from "./services.js";
+
+ifNotAuthenticated();
+loggedUserName();
+document.getElementById("logout").addEventListener("click", logOutUser);
 
 // hämta element
 const todoList = document.getElementById('todoList');
 const createMode = document.getElementById('todo-btn');
 const dynamicBtn = document.getElementById("dynamicButton");
-
+let currentTodoId;
 // hämta todos från localStorage
-let todoDataList = localStorage.getItem("todos");
-let todoJsonList = [];
+let { userTodos: todoDataList } = getUserActivities();
 
-try {
-    todoJsonList = todoDataList ? JSON.parse(todoDataList) : [];
-} catch (e) {
-    console.error("Fel vid parsing av todos:", e);
-    todoJsonList = [];
-}
 
 //funktion för dynamiska knappar
 function setButtonMode(mode) {
@@ -55,31 +43,31 @@ dynamicBtn.addEventListener("click", function() {
         const todoCategory = document.getElementById('taskCategory').value;
         const todoDeadline = document.getElementById('taskDeadline').value;
      
-        let todo = new Todo(crypto.randomUUID(), todoTitle, todoDescription, todoEstimate, todoCategory, todoDeadline, false);
+        const todo = new Todo(generateRandomUUID(), todoTitle, todoDescription, todoEstimate, todoCategory, todoDeadline, false, new Date().toLocaleString(), getLoggedUserFromStorage().id);
     
         // spara till localStorage
-        todoJsonList.push(todo);
-        localStorage.setItem("todos", JSON.stringify(todoJsonList));
+        todoDataList.push(todo);
+        saveToStorage("Todo", todoDataList);
         bootstrap.Modal.getInstance(document.getElementById("taskModal")).hide();
     
         // uppdatera visningen
         displayTodos();
 
     } else if (dynamicBtn.dataset.mode === "update") {
-       
+
         // hämta todo att uppdatera
-        let todoIndex = todoJsonList.findIndex(todo => todo.id === currentTodoId);
+        let todoIndex = todoDataList.findIndex(todo => todo.id === currentTodoId);
 
         if (todoIndex !== -1) {
             // uppdatera todo med nya värden från inputfälten
-            todoJsonList[todoIndex].title = document.getElementById('taskTitle').value;
-            todoJsonList[todoIndex].description = document.getElementById('taskDescription').value;
-            todoJsonList[todoIndex].timeEstimate = document.getElementById('timeEstimate').value;
-            todoJsonList[todoIndex].category = document.getElementById('taskCategory').value;
-            todoJsonList[todoIndex].deadline = document.getElementById('taskDeadline').value;
+            todoDataList[todoIndex].title = document.getElementById('taskTitle').value;
+            todoDataList[todoIndex].description = document.getElementById('taskDescription').value;
+            todoDataList[todoIndex].timeEstimate = document.getElementById('timeEstimate').value;
+            todoDataList[todoIndex].category = document.getElementById('taskCategory').value;
+            todoDataList[todoIndex].deadline = document.getElementById('taskDeadline').value;
 
             // spara uppdaterad lista till localStorage
-            localStorage.setItem("todos", JSON.stringify(todoJsonList));
+            saveToStorage("Todo", todoDataList);
     
             // stäng modalen
             bootstrap.Modal.getInstance(document.getElementById("taskModal")).hide();
@@ -94,7 +82,7 @@ dynamicBtn.addEventListener("click", function() {
 displayTodos();
 
 // hämta todos
-function displayTodos(todos = todoJsonList) {
+function displayTodos(todos = todoDataList) {
     todoList.innerHTML = "";
     if (todos.length === 0) {
         const tr = document.createElement('tr');
@@ -151,27 +139,27 @@ function displayTodos(todos = todoJsonList) {
 
 // Sätt todo som slutförd/ej slutförd
 let toggleTodoCompletion = (todoId) => {
-    let todo = todoJsonList.find(todo => todo.id === todoId);
+    let todo = todoDataList.find(todo => todo.id === todoId);
     
     if (todo) {
         todo.isCompleted = !todo.isCompleted;
-        localStorage.setItem("todos", JSON.stringify(todoJsonList));
+        saveToStorage("Todo", todoDataList);
         displayTodos(); 
     }
 };
 
 // delete function
 function deleteTodo(id){
-    todoJsonList = todoJsonList.filter(todo => todo.id !== id);
-    localStorage.setItem("todos", JSON.stringify(todoJsonList));
+    todoDataList = todoDataList.filter(todo => todo.id !== id);
+    saveToStorage("Todo", todoDataList);
     const row = document.getElementById(id);
     row.remove(); 
 }
 
 // edit function
 function updateTodo(id){
-    currentTodoId = id; // id för aktuell todo
-    const todo = todoJsonList.find(todo => todo.id === id);
+    currentTodoId = id
+    const todo = todoDataList.find(todo => todo.id === id);
     if (!todo) return;
     setButtonMode(1);
     openTaskModal(todo);
@@ -194,8 +182,8 @@ function openTaskModal(todo) {
 document.getElementById("filterCategory").addEventListener("change", (event) => {
     const valdKategori = event.target.value; // Hämta vald kategori
     let filteredTodos = valdKategori === "all"
-    ? todoJsonList
-    : todoJsonList.filter(todo => todo.category.toLowerCase() === valdKategori.toLowerCase());
+    ? todoDataList
+    : todoDataList.filter(todo => todo.category.toLowerCase() === valdKategori.toLowerCase());
 
     displayTodos(filteredTodos); // Skicka vald kategori till displayTodos
 });
@@ -206,11 +194,11 @@ document.getElementById("filterStatus").addEventListener("change", (event) => {
     let filteredTodos = [];
 
     if (valdStatus === "all") {
-        filteredTodos = todoJsonList;
+        filteredTodos = todoDataList;
     } else if (valdStatus === "completed") {
-        filteredTodos = todoJsonList.filter(todo => todo.isCompleted); 
+        filteredTodos = todoDataList.filter(todo => todo.isCompleted); 
     } else if (valdStatus === "notCompleted") {
-        filteredTodos = todoJsonList.filter(todo => !todo.isCompleted); 
+        filteredTodos = todoDataList.filter(todo => !todo.isCompleted); 
     }
 
     displayTodos(filteredTodos);
@@ -222,7 +210,7 @@ document.getElementById("sortBy").addEventListener("change", sortTodos);
 function sortTodos() {
     const sortValue = document.getElementById("sortBy").value;
     
-    let sortedTodos = [...todoJsonList]; 
+    let sortedTodos = [...todoDataList]; 
 
     switch (sortValue) {
         case "deadlineAsc":
