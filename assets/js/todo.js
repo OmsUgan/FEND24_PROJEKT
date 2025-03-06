@@ -9,9 +9,9 @@ document.getElementById("logout").addEventListener("click", logOutUser);
 const todoList = document.getElementById('todoList');
 const createMode = document.getElementById('todo-btn');
 const dynamicBtn = document.getElementById("dynamicButton");
-
+let currentTodoId;
 // hämta todos från localStorage
-let { userTodos: todoDataList } = getUserActivities();
+const { userTodos: todoDataList } = getUserActivities();
 
 
 //funktion för dynamiska knappar
@@ -54,7 +54,6 @@ dynamicBtn.addEventListener("click", function() {
         displayTodos();
 
     } else if (dynamicBtn.dataset.mode === "update") {
-        const currentTodoId = document.querySelector(".edit-todo").dataset.id;
 
         // hämta todo att uppdatera
         let todoIndex = todoDataList.findIndex(todo => todo.id === currentTodoId);
@@ -159,6 +158,7 @@ function deleteTodo(id){
 
 // edit function
 function updateTodo(id){
+    currentTodoId = id
     const todo = todoDataList.find(todo => todo.id === id);
     if (!todo) return;
     setButtonMode(1);
