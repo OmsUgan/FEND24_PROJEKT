@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Page</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="bg-light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fs-4 fw-medium" href="#">PlaneraMera</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-outline-light btn-lg px-3 py-2 mx-2 my-1" href="/auth/login.html">Logga in</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="d-flex justify-content-center align-items-center text-center bg-dark text-white" 
+    style="background-image: url('/assets/img/landingpage.jpg'); background-size: cover; background-position: center; height: 80vh; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.117);">
+    <div class="bg-white bg-opacity-25 p-4 rounded shadow-sm" style="margin-top: 200px; margin-left: 50px;">
+        <h1 class="display-4 text-dark">Organisera ditt liv på <span class="fw-bold text-dark">En plats</span></h1>
+        <h4 class="fs-3 text-dark">Skapa vanor, planera evenemang och nå dina mål med vår assistent.</h4>
+        <a href="/auth/register.html" class="btn btn-outline-dark btn-lg mt-3">Kom igång</a>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white py-5">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start flex-wrap">
+        <div class="mb-4 mb-md-0" style="flex: 1; max-width: 400px;">
+            <h5 class="mb-3">PlaneraMera</h5>
+            <p class="mb-2">PlaneraMera hjälper dig att organisera <br>ditt liv på ett enkelt och effektivt sätt.</p>
+        </div>
+        <div class="mb-4 mb-md-0" style="flex: 1; max-width: 400px;">
+            <h5 class="mb-3">Följ oss</h5>
+            <div class="d-flex gap-3">
+                <a href="#" class="text-white text-decoration-none"><i class="bi bi-facebook"></i> Facebook</a>
+                <a href="#" class="text-white text-decoration-none"><i class="bi bi-instagram"></i> Instagram</a>
+                <a href="#" class="text-white text-decoration-none"><i class="bi bi-twitter"></i> Twitter</a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <p class="mb-0">© 2025 PlaneraMera. Alla rättigheter förbehållna.</p>
+    </div>
+</footer>
+
+
+</body>
+
+</html>

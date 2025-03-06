@@ -1,0 +1,34 @@
+.list-group-item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  margin-top: 0;
+  border-width: 0 !important;
+}
+.b-example-vr {
+    height: 100vh;
+}
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+.bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #3F4348;
+}
+.nav-pills .nav-link:hover {
+    background-color: #3F4348;
+}
+.form-switch.form-switch-md .form-check-input {
+    height: 1.5rem;
+    width: calc(2rem + 0.75rem);
+    border-radius: 3rem;
+}
+.form-check-input:checked {
+    background-color: #007A55;
+    border-color: #007A55;
+}
