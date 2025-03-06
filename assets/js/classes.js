@@ -19,7 +19,7 @@ export class Habit {
 }
 
 export class Todo {
-    constructor(id, title, description, timeEstimate, category, deadline, isCompleted, userId) {
+    constructor(id, title, description, timeEstimate, category, deadline, isCompleted, createdAt, userId) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -27,6 +27,7 @@ export class Todo {
         this.category = category;
         this.deadline = deadline;
         this.isCompleted = isCompleted;
+        this.createdAt = createdAt;
         this.userId = userId;
     }
 }

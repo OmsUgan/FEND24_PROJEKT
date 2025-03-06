@@ -1,5 +1,5 @@
 import { ScheduledEvent } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, ifNotAuthenticated, loggedUserName, logOutUser } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage } from "./services.js";
 
 ifNotAuthenticated();
 loggedUserName();
@@ -115,7 +115,7 @@ const createEvent = () => {
         return;
     }
 
-    const newEvent = new ScheduledEvent(generateRandomUUID(), eventTitle, eventStartDateTime.toISOString(), eventEndDateTime.toISOString());
+    const newEvent = new ScheduledEvent(generateRandomUUID(), eventTitle, eventStartDateTime.toISOString(), eventEndDateTime.toISOString(), getLoggedUserFromStorage().id);
     eventListFromStorage.push(newEvent);
     saveToStorage("Event", eventListFromStorage);
 

@@ -1,5 +1,5 @@
 import { Todo } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage } from "./services.js";
 
 ifNotAuthenticated();
 loggedUserName();
@@ -42,7 +42,7 @@ dynamicBtn.addEventListener("click", function() {
         const todoCategory = document.getElementById('taskCategory').value;
         const todoDeadline = document.getElementById('taskDeadline').value;
      
-        const todo = new Todo(generateRandomUUID(), todoTitle, todoDescription, todoEstimate, todoCategory, todoDeadline, false);
+        const todo = new Todo(generateRandomUUID(), todoTitle, todoDescription, todoEstimate, todoCategory, todoDeadline, false, new Date().toLocaleString(), getLoggedUserFromStorage().id);
     
         // spara till localStorage
         todoDataList.push(todo);

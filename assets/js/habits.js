@@ -1,5 +1,5 @@
 import { Habit } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage } from "./services.js";
 
 ifNotAuthenticated();
 loggedUserName();
@@ -132,7 +132,7 @@ function saveHabit() {
         return;
     }
 
-    const newHabit = new Habit(generateRandomUUID(), title, priority, 0)
+    const newHabit = new Habit(generateRandomUUID(), title, priority, 0, getLoggedUserFromStorage().id)
     
     //Här pushar vi den nya habit till våran array och vi sparar den
     habitsDataList.push(newHabit);
