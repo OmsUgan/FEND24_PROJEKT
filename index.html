@@ -1,61 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="PÖS. Application created by Pegah, Ömer and Sebastian.">
-    <meta name="description" content="The function of this application is to help you organize and prioritize your tasks.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/index-style.css">
-    <script src="assets/js/signUp-In.js" defer></script>
-    <title>Welcome</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Page</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <header>
-        <div class="side-logo"><img src="/assets/img/logo.svg" alt="logo"> PÖS
-        </div>
-        <div id="signIn-signUp">
-            <button class="signInBtn" onclick="dialogOpen('signIn')">Sign In</button>
-            <button class="signUpBtn" onclick="dialogOpen('signUp')">Sign Up</button>
-        </div>
-    </header>
 
-    <main class="container">
-        <div class="welcome-message">
-            <h1>Organize your life in <spam> one place.</spam></h1>
-            <p> Create habits, plan events, and reach your goals with our assistant.</p>
-            <img src="assets/img/dashboard.png" alt="dashboard screenshot">
+<body class="bg-light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fs-4 fw-medium" href="#">PlaneraMera</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-outline-light btn-lg px-3 py-2 mx-2 my-1" href="/auth/login.html">Logga in</a>
+                </li>
+            </ul>
         </div>
-    </main>
+    </div>
+</nav>
 
-    <dialog id="signIn" onclick="dialogClose('signIn', event)">
-        <form class="form">
-            <p class="form-title">Sign in to your account</p>
-            <div class="input-container">
-                <input type="email" placeholder="Enter email">
-            </div>
-            <div class="input-container">
-                <input type="password" placeholder="Enter password">
-            </div>
-            <button type="submit" class="submit">Sign in</button>
-            <button type="button" class="cancel" onclick="dialogClose('signIn')">Cancel</button>
-        </form>
-    </dialog>
+<!-- Hero Section -->
+<section class="d-flex justify-content-center align-items-center text-center bg-dark text-white" 
+    style="background-image: url('/assets/img/landingpage.jpg'); background-size: cover; background-position: center; height: 80vh; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.117);">
+    <div class="bg-white bg-opacity-75 p-4 rounded shadow-sm" style="margin-top: 200px; margin-left: 50px;">
+        <h1 class="display-4 text-dark">Organisera ditt liv på <span class="fw-bold text-dark">En plats</span></h1>
+        <h4 class="fs-3 text-dark">Skapa vanor, planera evenemang och nå dina mål med vår assistent.</h4>
+        <a href="/auth/register.html" class="btn btn-outline-dark btn-lg mt-3">Kom igång</a>
+    </div>
+</section>
 
-    <dialog id="signUp" onclick="dialogClose('signUp', event)">
-        <form class="form">
-            <p class="form-title">Register an Account</p>
-            <div class="input-container">
-                <input type="text" placeholder="Enter your name">
+<!-- Footer Section -->
+<footer class="bg-dark text-white py-5">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start flex-wrap">
+        <div class="mb-4 mb-md-0" style="flex: 1; max-width: 400px;">
+            <h5 class="mb-3">PlaneraMera</h5>
+            <p class="mb-2">PlaneraMera hjälper dig att organisera <br>ditt liv på ett enkelt och effektivt sätt.</p>
+        </div>
+        <div class="mb-4 mb-md-0" style="flex: 1; max-width: 400px;">
+            <h5 class="mb-3">Följ oss</h5>
+            <div class="d-flex gap-3">
+                <a href="#" class="text-white text-decoration-none"><i class="bi bi-facebook"></i> Facebook</a>
+                <a href="#" class="text-white text-decoration-none"><i class="bi bi-instagram"></i> Instagram</a>
+                <a href="#" class="text-white text-decoration-none"><i class="bi bi-twitter"></i> Twitter</a>
             </div>
-            <div class="input-container">
-                <input type="email" placeholder="Enter email">
-            </div>
-            <div class="input-container">
-                <input type="password" placeholder="Enter password">
-            </div>
-            <button type="submit" class="submit">Register</button>
-            <button type="button" class="cancel" onclick="dialogClose('signUp')">Cancel</button>
-        </form>
-    </dialog>
+        </div>
+    </div>
+    <div class="text-center">
+        <p class="mb-0">© 2025 PlaneraMera. Alla rättigheter förbehållna.</p>
+    </div>
+</footer>
+
+
+</body>
 
 </html>
