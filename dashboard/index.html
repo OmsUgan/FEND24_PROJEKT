@@ -16,34 +16,34 @@
   <main class="d-flex flex-nowrap" style="background-color: #dee2e6;">
     <!-- Här börjar sidebar -->
     <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <a href="/dashboard/index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <span class="fs-3">PlaneraMera</span>
       </a>
       <hr>
 
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item mb-2">
-          <a href="#" class="nav-link text-white active">
+          <a href="/dashboard/index.html" class="nav-link text-white active">
             <i class="fa-solid fa-house fa-sm me-2"></i>
             Hem
           </a>
         </li>
         <li class="nav-item mb-2">
-          <a href="/dashboard/event/event.html" class="nav-link text-white">
+          <a href="/dashboard/event/index.html" class="nav-link text-white">
             <i class="fa-solid fa-calendar fa-sm me-2"></i>
-            Event
+            Evenemanger
           </a>
         </li>
         <li class="nav-item mb-2">
           <a href="/dashboard/habit/index.html" class="nav-link text-white">
             <i class="fa-solid fa-list fa-sm me-2"></i>
-            Habit
+            Rutiner
           </a>
         </li>
         <li class="nav-item">
-          <a href="/dashboard/todo/todo.html" class="nav-link text-white">
+          <a href="/dashboard/todo/index.html" class="nav-link text-white">
             <i class="fa-solid fa-square-check fa-sm me-2"></i>
-            Todo
+            Todos
           </a>
         </li>
       </ul>
@@ -52,7 +52,7 @@
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgCVERpCw4kwRI8INQtcfx9XJCMYPb2eNDJQ&s" alt="" width="32" height="32" class="rounded-circle me-2">
-          <span id="logged-user-name">Namn och förnamn</span>
+          <span id="logged-user-name"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
           <li><a class="dropdown-item" href="#" id="logout">Logga ut</a></li>
@@ -70,8 +70,8 @@
           <p class="h3 mb-4" id="welcome-user"></p>
 
           <blockquote class="blockquote m-0">
-            <p id="quote">Some famous quote</p>
-            <footer class="blockquote-footer fst-italic" id="author">Some famous author</footer>
+            <p id="quote"></p>
+            <footer class="blockquote-footer fst-italic" id="author"></footer>
           </blockquote>
           
         </div>
@@ -86,16 +86,11 @@
                 Evenemanger
               </div>
             </div>
-
-              <ul class="list-group" id="userEvents">
-              </ul>
-
+            <ul class="list-group" id="userEvents">
+            </ul>
             <div class="card-body">
-              <a href="/dashboard/event/event.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
+              <a href="/dashboard/event/index.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
             </div>
-
-
-
           </div>
         </div>
         
@@ -107,10 +102,8 @@
                 Rutiner
               </div>
             </div>
-
-              <ul class="list-group" id="userHabits">
-              </ul>
-
+            <ul class="list-group" id="userHabits">
+            </ul>
             <div class="card-body">
               <a href="/dashboard/habit/index.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
             </div>
@@ -124,19 +117,15 @@
                 Todos
               </div>
             </div>
-
-              <ul class="list-group" id="userTodos">
-              </ul>
-
+            <ul class="list-group" id="userTodos">
+            </ul>
             <div class="card-body">
-              <a href="/dashboard/todo/todo.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
+              <a href="/dashboard/todo/index.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
             </div>
           </div>
         </div>
-    
       </div>
     </div>
-    
   </main>
 </body>
 </html>

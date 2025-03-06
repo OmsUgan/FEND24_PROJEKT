@@ -1,6 +1,14 @@
 import { getFromStorage, saveToStorage, generateRandomUUID, hashPassword } from "../js/services.js";
 import { User } from "../js/classes.js"
 
+const ifNotAuthenticated = () => {
+    if (sessionStorage.getItem("loggedUser") !== null) {
+        window.location.href = "/dashboard/index.html"
+        return true;
+    }
+}
+ifNotAuthenticated()
+
 const usersList = getFromStorage("Users");
 const error = document.getElementById("error");
 
