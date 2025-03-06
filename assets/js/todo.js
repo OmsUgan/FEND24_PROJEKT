@@ -1,5 +1,5 @@
 import { Todo } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage, getUserActivities } from "./services.js";
 
 ifNotAuthenticated();
 loggedUserName();
@@ -11,7 +11,8 @@ const createMode = document.getElementById('todo-btn');
 const dynamicBtn = document.getElementById("dynamicButton");
 
 // hämta todos från localStorage
-let todoDataList = getFromStorage("Todo");
+const { userTodos: todoDataList } = getUserActivities();
+
 
 //funktion för dynamiska knappar
 function setButtonMode(mode) {

@@ -1,12 +1,12 @@
 import { Habit } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage, getUserActivities } from "./services.js";
 
 ifNotAuthenticated();
 loggedUserName();
 document.getElementById("logout").addEventListener("click", logOutUser);
 
 //Hämtas habits från localstorage
-let habitsDataList = getFromStorage("Habit");
+const { userHabits: habitsDataList } = getUserActivities();
 
 //Renderar habit i en lista
 function createHabitElement(habit) {

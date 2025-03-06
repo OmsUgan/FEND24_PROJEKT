@@ -1,11 +1,12 @@
 import { ScheduledEvent } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, swedishDateTimeFormat, ifNotAuthenticated, loggedUserName, logOutUser, getLoggedUserFromStorage, getUserActivities } from "./services.js";
 
 ifNotAuthenticated();
 loggedUserName();
 document.getElementById("logout").addEventListener("click", logOutUser);
 
-let eventListFromStorage = getFromStorage("Event");
+//let eventListFromStorage = getFromStorage("Event");
+const { userEvents: eventListFromStorage } = getUserActivities();
 
 const renderEventListPage = (eventData) => {
     const eventListDiv = document.getElementById("event-list");

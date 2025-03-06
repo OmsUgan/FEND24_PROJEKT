@@ -61,6 +61,21 @@ export const logOutUser = () => {
     return window.location.href = "/auth/login.html";
 }
 
+// Hämta inloggad användarens aktiviteter
+export const getUserActivities = () => {
+    const currentLoggedUser = getLoggedUserFromStorage();
+
+    const eventDataList = getFromStorage("Event");
+    const habitDataList = getFromStorage("Habit");
+    const todoDataList = getFromStorage("Todo");
+
+    const userEvents = eventDataList.filter(event => event.userId === currentLoggedUser.id);
+    const userHabits = habitDataList.filter(habit => habit.userId === currentLoggedUser.id);
+    const userTodos = todoDataList.filter(todo => todo.userId === currentLoggedUser.id);
+
+    return { userEvents, userHabits, userTodos }
+}
+
 // Event
 // export const createButton = (textContent, value, classList, dataToggle = "", dataTarget = "") => {
 //     const button = document.createElement("button");
