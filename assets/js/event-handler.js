@@ -6,10 +6,11 @@ loggedUserName();
 document.getElementById("logout").addEventListener("click", logOutUser);
 
 //let eventListFromStorage = getFromStorage("Event");
-const { userEvents: eventListFromStorage } = getUserActivities();
+let { userEvents: eventListFromStorage } = getUserActivities();
 
 const renderEventListPage = (eventData) => {
     const eventListDiv = document.getElementById("event-list");
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit',  minute: '2-digit' };
 
     const eventUl = document.createElement("ul");
     eventUl.classList.add("list-group");
@@ -62,7 +63,7 @@ const renderEventListPage = (eventData) => {
             titleCol.append(spanTitle);
 
             const small = document.createElement("small");
-            small.textContent = `${swedishDateTimeFormat(new Date(event.start))} — ${swedishDateTimeFormat(new Date(event.end))}`;
+            small.textContent = `${swedishDateTimeFormat(new Date(event.start), options)} — ${swedishDateTimeFormat(new Date(event.end), options)}`;
             timeCol.append(small);
 
             const actionDiv = document.createElement("div");

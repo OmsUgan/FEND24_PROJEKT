@@ -6,7 +6,7 @@ loggedUserName();
 document.getElementById("logout").addEventListener("click", logOutUser);
 
 //Hämtas habits från localstorage
-const { userHabits: habitsDataList } = getUserActivities();
+let { userHabits: habitsDataList } = getUserActivities();
 
 //Renderar habit i en lista
 function createHabitElement(habit) {

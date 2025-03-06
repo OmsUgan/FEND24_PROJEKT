@@ -49,15 +49,15 @@
       </ul>
 
       <hr>
-        <div class="dropdown">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgCVERpCw4kwRI8INQtcfx9XJCMYPb2eNDJQ&s" alt="" width="32" height="32" class="rounded-circle me-2">
-            <span id="logged-user-name">Namn och förnamn</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">Logga ut</a></li>
-          </ul>
-        </div>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgCVERpCw4kwRI8INQtcfx9XJCMYPb2eNDJQ&s" alt="" width="32" height="32" class="rounded-circle me-2">
+          <span id="logged-user-name">Namn och förnamn</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li><a class="dropdown-item" href="#" id="logout">Logga ut</a></li>
+        </ul>
+      </div>
     </div>
     <!-- Här slutar sidebar -->
 
@@ -83,23 +83,11 @@
           <div class="card shadow-sm">
             <div class="card-header p-3 mb-2">
               <div class="card-title mb-0 h5">
-                Event
+                Evenemanger
               </div>
             </div>
 
-              <ul class="list-group">
-                <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                    <p>Titel</p>
-                    <p>13:00 - 13:00</p>
-                </li>
-                <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                  <p>Titel</p>
-                  <p>13:00 - 13:00</p>
-              </li>
-              <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                <p>Titel</p>
-                <p>13:00 - 13:00</p>
-            </li>
+              <ul class="list-group" id="userEvents">
               </ul>
 
             <div class="card-body">
@@ -116,28 +104,15 @@
           <div class="card shadow-sm">
             <div class="card-header p-3 mb-2">
               <div class="card-title mb-0 h5">
-                Habit
+                Rutiner
               </div>
             </div>
 
-              <ul class="list-group">
-                <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-
-                  <p class="fw-semibold">Titel</p>
-                  <p>20</p>
-                </li>
-                <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                  <p class="fw-semibold">Titel</p>
-                  <p">10</p>
-              </li>
-              <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                <p class="fw-semibold">Titel</p>
-                <p>5</p>
-            </li>
+              <ul class="list-group" id="userHabits">
               </ul>
 
             <div class="card-body">
-              <a href="#" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
+              <a href="/dashboard/habit/index.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
             </div>
           </div>
         </div>
@@ -146,27 +121,15 @@
           <div class="card shadow-sm">
             <div class="card-header p-3 mb-2">
               <div class="card-title mb-0 h5">
-                Todo
+                Todos
               </div>
             </div>
 
-              <ul class="list-group">
-                <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                  <p class="fw-semibold">Städa huset</p>
-                  <p>205-03-17</p>
-                </li>
-                <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                  <p class="fw-semibold">Titel</p>
-                  <p">205-03-15</p>
-              </li>
-              <li class="list-group-item p-0 my-1 mx-3 d-flex justify-content-between align-items-center">
-                <p class="fw-semibold">Titel</p>
-                <p>205-03-14</p>
-            </li>
+              <ul class="list-group" id="userTodos">
               </ul>
 
             <div class="card-body">
-              <a href="#" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
+              <a href="/dashboard/todo/todo.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><p class="fw-semibold m-0 text-end">Gå till listan <i class="fas fa-angle-right fa-sm"></i></p> </a>
             </div>
           </div>
         </div>

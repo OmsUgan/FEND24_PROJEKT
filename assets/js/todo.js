@@ -11,7 +11,7 @@ const createMode = document.getElementById('todo-btn');
 const dynamicBtn = document.getElementById("dynamicButton");
 
 // hämta todos från localStorage
-const { userTodos: todoDataList } = getUserActivities();
+let { userTodos: todoDataList } = getUserActivities();
 
 
 //funktion för dynamiska knappar
