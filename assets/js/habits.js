@@ -1,5 +1,9 @@
 import { Habit } from "./classes.js";
-import { getFromStorage, saveToStorage, generateRandomUUID } from "./services.js";
+import { getFromStorage, saveToStorage, generateRandomUUID, ifNotAuthenticated, loggedUserName, logOutUser } from "./services.js";
+
+ifNotAuthenticated();
+loggedUserName();
+document.getElementById("logout").addEventListener("click", logOutUser);
 
 //Hämtas habits från localstorage
 let habitsDataList = getFromStorage("Habit");
@@ -133,6 +137,8 @@ function saveHabit() {
     //Här pushar vi den nya habit till våran array och vi sparar den
     habitsDataList.push(newHabit);
     saveToStorage("Habit", habitsDataList);
+
+    document.getElementById("title").value = "";
 
     bootstrap.Modal.getInstance(document.getElementById("new-habit")).hide();
 
