@@ -42,9 +42,7 @@ function renderDashboardCards (cardId, data) {
   
       dashboardCardUl.append(li);
     });
-
   }
-
 };
 
 function showOnDashboard(arrName, dataList) {
