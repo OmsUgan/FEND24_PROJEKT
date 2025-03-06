@@ -46,11 +46,12 @@ function renderDashboardCards (cardId, data) {
 };
 
 function showOnDashboard(arrName, dataList) {
-  console.log(arrName, "aa", dataList);
-  let sortedData;
+  let sortedData = [];
 
   if (arrName === "userEvents") {
-    sortedData = dataList.sort((a, b) => new Date(a.start) - new Date(b.start)).slice(0, 3);
+    const currentDateTime = new Date();
+    currentDateTime.setSeconds(0, 0);
+    sortedData = dataList.filter(event => new Date(event.start) > currentDateTime).sort((a, b) => new Date(a.start) - new Date(b.start)).slice(0, 3);
   } else if (arrName === "userHabits") {
     sortedData = dataList.sort((a, b) => b.count - a.count).slice(0, 3);
   } else {

@@ -42,7 +42,12 @@ dynamicBtn.addEventListener("click", function() {
         const todoEstimate = document.getElementById('timeEstimate').value;
         const todoCategory = document.getElementById('taskCategory').value;
         const todoDeadline = document.getElementById('taskDeadline').value;
-     
+    
+        if (!todoTitle || !todoEstimate || !todoCategory || !todoDeadline) {
+            alert("Alla fält måste fyllas i!");
+            return;
+        }
+
         const todo = new Todo(generateRandomUUID(), todoTitle, todoDescription, todoEstimate, todoCategory, todoDeadline, false, new Date().toLocaleString(), getLoggedUserFromStorage().id);
     
         // spara till localStorage
@@ -104,7 +109,7 @@ function displayTodos(todos = todoDataList) {
                 <td>${todo.deadline}</td>
                 <td class="text-end">
                     <i class="fa-solid fa-pen me-2 edit-todo" style="color: #4a4e54;" data-id="${todo.id}"></i>
-                    <i class="fa-solid fa-trash delete-todo" style="color: #4a4e54;" data-id="${todo.id}"></i>
+                    <i class="fa-solid fa-trash delete-todo" data-bs-toggle="modal" data-bs-target="#deleteModal" style="color: #4a4e54;" data-id="${todo.id}"></i>
                 </td>
             `;
             todoList.append(tr);
@@ -118,14 +123,10 @@ function displayTodos(todos = todoDataList) {
             });
         });
     
-            // delete eventlistener för att radera en todo
-        document.querySelectorAll(".delete-todo").forEach(button => {
-            button.addEventListener("click", function() {
-                const id = this.getAttribute("data-id");
-                deleteTodo(id);
-            });
+        document.getElementById("deleteModal").addEventListener("show.bs.modal", (event) => {
+            document.getElementById("id").value = event.relatedTarget.dataset.id;
         });
-    
+
         // edit eventlistener för att ändra en todo
         document.querySelectorAll(".edit-todo").forEach(button => {
             button.addEventListener("click", function() {
@@ -148,13 +149,16 @@ let toggleTodoCompletion = (todoId) => {
     }
 };
 
-// delete function
-function deleteTodo(id){
+//delete function
+document.getElementById("delete-todo").addEventListener("click", () => {
+    const id = document.getElementById("id").value;
     todoDataList = todoDataList.filter(todo => todo.id !== id);
     saveToStorage("Todo", todoDataList);
-    const row = document.getElementById(id);
-    row.remove(); 
-}
+    
+    bootstrap.Modal.getInstance(document.getElementById("deleteModal")).hide();
+    displayTodos();
+});
+
 
 // edit function
 function updateTodo(id){

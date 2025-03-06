@@ -20,12 +20,12 @@ function createHabitElement(habit) {
     if (habit.length === 0) {
         const habitList = document.createElement("li");
         habitList.textContent = "Du har inga rutiner sparade!";
-        habitList.classList.add("list-group-item", "d-flex", "justify-content-center", "fw-semibold");
+        habitList.classList.add("list-group-item", "shadow-sm", "d-flex", "justify-content-center", "fw-semibold");
         habitUl.append(habitList);
     } else {
         habit.forEach(habit => {
             const habitList = document.createElement("li");
-            habitList.classList.add("list-group-item");
+            habitList.classList.add("list-group-item", "shadow-sm");
             habitList.setAttribute('data-id', habit.id);
 
             const gridDivContainer = document.createElement("div");
@@ -86,7 +86,6 @@ function createHabitElement(habit) {
                     habit.count++;
                 } else if (action === 'reset') {
                     habit.count = 0;
-                    alert("reset")
                 }
                 
                 //Här uppdateras det counter som visas i dokumentet efter att ha tryckt på någon knapp och samtidigt uppdateras informationen i localStorae

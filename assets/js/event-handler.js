@@ -20,16 +20,16 @@ const renderEventListPage = (eventData) => {
     if (eventData.length === 0) {
         const eventLi = document.createElement("li");
         eventLi.textContent = "Du har inga evenemang sparade!"; 
-        eventLi.classList.add("list-group-item", "d-flex", "justify-content-center", "fw-semibold");
+        eventLi.classList.add("list-group-item", "shadow-sm", "d-flex", "justify-content-center", "fw-semibold");
         eventUl.append(eventLi);
     } else {
-        eventData.sort((a, b) => new Date(a.start) - new Date(b.end));
+        eventData.sort((a, b) => new Date(a.start) - new Date(b.start));
         
         eventData.forEach(event => {
             const currentDateTime = new Date();
             
             const eventLi = document.createElement("li");
-            eventLi.classList.add("list-group-item");
+            eventLi.classList.add("list-group-item", "shadow-sm");
 
             const gridDivContainer = document.createElement("div");
             gridDivContainer.classList.add("container", "p-2");
