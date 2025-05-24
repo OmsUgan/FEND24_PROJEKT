@@ -16,53 +16,54 @@
 
 </head>
 <body>
-    <main class="d-flex flex-nowrap" style="background-color: #dee2e6;">
-        <!-- Här börjar sidebar -->
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-          <a href="/dashboard/index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-3">PlaneraMera</span>
+  <main class="d-flex flex-nowrap" style="background-color: #fff7fc;">
+    <!-- Här börjar sidebar -->
+    <div class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px; background-color: #ffffff;">
+      <a href="/dashboard/index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <span class="fs-3">PlaneraMera</span>
+      </a>
+      <hr>
+
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item mb-2">
+          <a href="/dashboard/index.html" class="nav-link text-dark active">
+            <i class="fa-solid fa-house fa-sm me-2"></i>
+            Hem
           </a>
-          <hr>
-    
-          <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item mb-2">
-              <a href="/dashboard/index.html" class="nav-link text-white">
-                <i class="fa-solid fa-house fa-sm me-2"></i>
-                Hem
-              </a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="/dashboard/event/index.html" class="nav-link active">
-                <i class="fa-solid fa-calendar fa-sm me-2"></i>
-                Evenemanger
-              </a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="/dashboard/habit/index.html" class="nav-link text-white">
-                <i class="fa-solid fa-list fa-sm me-2"></i>
-                Rutiner
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/dashboard/todo/index.html" class="nav-link text-white">
-                <i class="fa-solid fa-square-check fa-sm me-2"></i>
-                Todos
-              </a>
-            </li>
-          </ul>
-    
-          <hr>
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgCVERpCw4kwRI8INQtcfx9XJCMYPb2eNDJQ&s" alt="" width="32" height="32" class="rounded-circle me-2">
-              <span id="logged-user-name"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" href="#" id="logout">Logga ut</a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- Här slutar sidebar -->
+        </li>
+        <li class="nav-item mb-2">
+          <a href="/dashboard/event/index.html" class="nav-link text-dark">
+            <i class="fa-solid fa-calendar fa-sm me-2"></i>
+            Evenemanger
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="/dashboard/habit/index.html" class="nav-link text-dark">
+            <i class="fa-solid fa-list fa-sm me-2"></i>
+            Rutiner
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/dashboard/todo/index.html" class="nav-link text-dark">
+            <i class="fa-solid fa-square-check fa-sm me-2"></i>
+            Todos
+          </a>
+        </li>
+      </ul>
+
+      <hr>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgCVERpCw4kwRI8INQtcfx9XJCMYPb2eNDJQ&s" alt="" width="32" height="32" class="rounded-circle me-2">
+          <span id="logged-user-name"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li><a class="dropdown-item" href="#" id="logout">Logga ut</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Här slutar sidebar -->
+
           
         <div class="b-example-vr container pt-4">
           <!-- Här ska ditt content vara -->
@@ -77,7 +78,7 @@
             </div>
           </div>
     
-          <div class="card shadow-sm my-4">
+          <div class="card shadow-sm my-4" style="border: 1px solid #e355ac;">
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <div class="dropdown">

@@ -17,11 +17,11 @@
 .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
 }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #3F4348;
+.nav-pills .nav-link.active, .nav-pills .show.nav-link {
+    background-color: #ffe7f3;
 }
 .nav-pills .nav-link:hover {
-    background-color: #3F4348;
+    background-color: #ffe7f3;
 }
 .form-switch.form-switch-md .form-check-input {
     height: 1.5rem;
